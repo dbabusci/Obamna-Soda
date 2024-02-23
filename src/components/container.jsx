@@ -24,21 +24,25 @@ function Container(){
             window.removeEventListener('mousemove', handleWindowMouseMovement,);
         };
     }, []);
-
+    /*
+    Works but err
+    */
     useEffect(() =>{
         setColorValue({
             r: mouseXY.x % 255,
             g: mouseXY.y % 255,
             b: (mouseXY.x + mouseXY.y) % 255,
         });
-    }, [colorValue]);    
+    }, [mouseXY]);    
 
     return(
-        <WordContext.Provider value={word}>
-            <ColorContext.Provider>
-                <Text/>
-            </ColorContext.Provider>
-        </WordContext.Provider>
+        <div className='container-holder'>
+            <WordContext.Provider value={word}>
+                <ColorContext.Provider value={colorValue}>
+                    <Text/>
+                </ColorContext.Provider>
+            </WordContext.Provider>
+        </div>
     );
 }
 
