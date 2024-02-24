@@ -4,9 +4,10 @@ import { WordContext, ColorContext } from './container';
 import '../style/style.css';
 
 function Text(){
-    const word = useContext(WordContext);
+    const w = useContext(WordContext);
     const cc = useContext(ColorContext);
 
+    const [word, setWord] = useState(w);
     const [color, setColor] = useState('');
 
     useEffect(() => {
