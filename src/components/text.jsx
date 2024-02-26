@@ -7,12 +7,16 @@ function Text(){
     const w = useContext(WordContext);
     const cc = useContext(ColorContext);
 
-    const [word, setWord] = useState(w);
+    const [word, setWord] = useState('');
     const [color, setColor] = useState('');
 
     useEffect(() => {
         setColor('rgb(' + String(cc.r) + ',' + String(cc.g) + ',' + String(cc.b) + ')');
     });
+
+    useEffect(() => {
+        setWord(w);
+    })
 
     return(
         <div className='text-holder'>

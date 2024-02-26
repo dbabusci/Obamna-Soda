@@ -22,6 +22,10 @@
 }
 
 .text-holder{
-    width: 100%;
+    width: 1400px; /*Won't work for mobile anyways*/
     height: 100%;
+}
+
+.switch-style{
+    justify-content: center;
 }

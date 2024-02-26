@@ -1,27 +1,24 @@
 import {useState, useEffect, createContext} from 'react';
-import Text from './text';
-import WordSwitch from './wordswitch';
+import { Switch } from '@mui/material';
 
-export const Option = {
-    o: 'obamna',
-    s: 'soda!'
-}
-
-export const WordContext = createContext({
-    word: Option.o,
-    setWord: (word) => {
-        if(word == Option.o){setWord(Option.s); console.log("Change from o->s");}
-        else{setWord(Option.o); console.log("Change from s->o");}
-    }
-});
+export const WordContext = createContext();
 export const ColorContext = createContext();
 
-function Container(){
+function Container({ children }){
+
+    const Option = {
+        o: 'obamna',
+        s: 'soda!'
+    }
 
     const [word, setWord] = useState(Option.o);
-    //const value = {word, setWord};
     const [mouseXY, setMouseXY] = useState({x: 0, y: 0});
     const [colorValue, setColorValue] = useState({r: 0, g: 0, b: 0}); 
+
+    function flipWord(){
+        if(word == Option.o){setWord(Option.s);}
+        else{setWord(Option.o);}
+    }
 
     useEffect(() =>{
         const handleWindowMouseMovement = event => {
@@ -37,9 +34,7 @@ function Container(){
             window.removeEventListener('mousemove', handleWindowMouseMovement,);
         };
     }, []);
-    /*
-    Works but err
-    */
+
     useEffect(() =>{
         setColorValue({
             r: mouseXY.x % 255,
@@ -49,14 +44,14 @@ function Container(){
     }, [mouseXY]);    
 
     return(
-        <div className='container-holder'>
-            <WordContext.Provider value={word}>
-                <ColorContext.Provider value={colorValue}>
-                    <Text/>
-                    <WordSwitch/>
-                </ColorContext.Provider>
-            </WordContext.Provider>
-        </div>
+        <WordContext.Provider value={word}>
+            <ColorContext.Provider value={colorValue}>
+                <div className='container-holder'>
+                    <Switch onChange={flipWord}/>
+                    {children}
+                </div>
+            </ColorContext.Provider>
+        </WordContext.Provider>
     );
 }
 

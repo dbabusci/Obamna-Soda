@@ -4,10 +4,13 @@ import './style/style.css';
 import Container from './components/container';
 import Text from './components/text';
 
+
 function App() {
   return (
     <div className='page'>
-      <Container/>
+      <Container>
+        <Text/>
+      </Container>
     </div>
   )
 }
